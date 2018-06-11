@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bootstrap 实例</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  <style>
+  /* Make the image fully responsive */
+  .carousel-inner img {
+      width: 100%;
+      height: 100%;
+  }
+  /* #demo{
+      width: 500px;
+  }
+  #demo img{width:500px;} */
+  </style>
+</head>
+<body>
+<!-- 1.1 Bootstrap 使用需要使用一个叫.carousel 类来初始化轮播容器，并使用.slide 来
+进行滑动处理
+触发轮播事件为 data-ride 的  data- 属性为 carousel
+注意 容器此时需要一个id选择器，因为翻页滚动需要进行绑定到哪个容器上 -->
+<!-- <div id="demo" class="carousel slide" data-ride="carousel" data-interval="2000" data-pause="hover" data-wrap="true"></div> -->
+<div id="demo" class="carousel slide" data-ride="carousel" data-interval="2000"></div>
+  <!-- 指示符 -->
+  <!-- 设置分页功能
+需要使用.carouse-indicators 分页容器 -->
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+ 
+  <!-- 轮播图片 -->
+  <!-- 设置轮播容器  .carousel-inner
+轮播容器的每一项是.carousel-inner
+选中为.active-->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="http://static.runoob.com/images/mix/img_fjords_wide.jpg">
+      <div class="carousel-caption">
+            <h3>第一张图片描述标题</h3>
+            <p>描述文字!</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="http://static.runoob.com/images/mix/img_nature_wide.jpg">
+    </div>
+    <div class="carousel-item">
+      <img src="http://static.runoob.com/images/mix/img_mountains_wide.jpg">
+    </div>
+  </div>
+ 
+  <!-- 左右切换按钮 -->
+  <a class="left carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="right carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+ 
+</div>
+
+</body>
+<script>
+    $('#demo').carousel({
+        interval :2000
+    });
+    // $('#demo').carousel('cycle');
+    $('#demo').on('slide.bs.carousel', function () {
+    // 执行一些动作...
+});
+console.log('1111');
+$('#demo').on('slid.bs.carousel', function () {
+    // 执行一些动作...
+})
+console.log('22222');
+$('.carousel-item').each(function(e){
+$(this).on('click',function(){
+    // 获取index
+    console.log($(this).html());
+    //  index() indexof()
+    console.log($(this).index());
+})
+});
+// 作业 实现单击左右button 查找当前的轮播图的index
+$('.carousel-indicators li').each(function(e){
+$(this).on('click',function(){
+    console.log($(this).html());
+    console.log($(this).index());
+});
+});
+//事件流 事件冒泡 事件捕捉
+//事件流描述的是页面元素接收事件的顺序；
+//事件冒泡 ：事件开始的时候由具体的元素接收，然后逐级向上传播到较为不具体的节点。
+//事件捕捉：事件开始的时候是由最不具体元素接收然后逐级向下传递到具体的节点。
+$('.left').on('click',function(){
+console.log("111111");
+var active = $('.carousel-indicators .active').index();
+console.log(active);
+});
+
+</script>
+</html>
